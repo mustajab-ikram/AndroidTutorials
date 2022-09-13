@@ -17,4 +17,42 @@ Android applications have a strict layout. There are certain folders such as Man
 - ### GRADLE SCRIPTS
    Gradle is storage for multiple build systems that when called can be applied to the app modules. The Gradle folder is independent of Android studio. They manage the entire build process. It provides processes and configuration settings specific to building and testing Android applications.
 ***
-
+## Activity Lifecycle
+- An activity is the single screen in android. It is like window or frame of Java. By the help of activity, you can place all your UI components or widgets in a single screen.
+- It is basically a kotlin class combined with its xml layout and inside of that class we define how our specific screen should behave in which situations.
+- All activities inherit from AppCompat Activity, which describes what an activity is, and we inherit from this class to take that behaviour and to make our activity out of that.
+- As the user navigates between different screens or apps, it goes through different states in their lifecycle. So an activity lifecycle consists of 7 different methods of android.app.Activity class.
+![Android Activity Lifecycle](Android-Activity-Lifecycle.png)
+- You must be aware that a program starts from a main() function in different programming languages. Similarly, android initiates the program within an activity with a call to onCreate() callback method. There is a sequence of callback methods that starts up an activity and then tear down in different  methods shown in the above Activity life cycle diagram:
+- Let’s understand these methods:
+  - **onCreate()** :  In this state, the activity is created.
+  - **onStart()** : This callback method is called when the activity becomes visible to the user.
+  - **onResume()** : The activity is in the foreground and the user can interact with it.
+  - **onPause()** : Activity is partially obscured by another activity. Other activity that’s in the foreground is semi-transparent.
+  - **onStop()** : The activity is completely hidden and not visible to the user.
+  - **onDestroy()** : Activity is destroyed and removed from the memory.
+- **NOTE:** Whenever an activity is created it gets pushed to our activity stack and if a new activity is arrived it gets pushed on top of it, in that similar fashion they are popped out from the stack.
+***
+## Logcat
+- Your best friend during android development.
+- Console for android studio.
+- LogCat Window is the place where various messages can be printed when an application runs. Suppose, you are running your application and the program crashes, unfortunately. Then, Logcat Window is going to help you to debug the output by collecting and viewing all the messages that your emulator throws. So, this is a very useful component for the app development because this Logcat dumps a lot of system messages and these messages are actually thrown by the emulator.
+- There are lots of methods that are present in the log class:
+  - v(String, String) - verbose
+  - d(String, String) - debug
+  - i(String, String) - information
+  - w(String, String) - warning
+  - e(String, String) - error
+- The verbose method is of very lesser priority and error is of higher priority. Thus, the method’s priority increases from verbose to error.
+- SYNTAX
+  - for verbose Log.v("TAG", "MESSAGE")
+  - for debug Log.d("TAG", "MESSAGE")
+  - for information Log.i("TAG", "MESSAGE")
+  - for warning Log.w("TAG", "MESSAGE")
+  - for error Log.e("TAG", "MESSAGE")
+***
+## Activity Lifecycle practical with Logcat
+- In your MainActivity override all the callback methods discussed above with **Log.d("Methods", "callbackName() is called")**
+> Like this 
+![override methods](overridenMethods.png)
+- Then in your logcat select Debug write your tag, and play around a bit.

@@ -56,3 +56,34 @@ Android applications have a strict layout. There are certain folders such as Man
 > Like this 
 ![override methods](overridenMethods.png)
 - Then in your logcat select Debug write your tag, and play around a bit.
+***
+## Views
+- The most common type of element we’ll define in resources are Views. View is the superclass for visual interface elements—a visual component on the screen is a View. Specific types of Views include: TextViews, ImageViews, Buttons, etc.
+   - View is a superclass for these components because it allows us to use polymorphism to treat all these visual elements the same way as instances of the same type. We can lay them out, draw them, click on them, move them, etc. And all the behavior will be the same—though subclasses can also have “extra” features
+- Here’s the big trick: one subclass of View is ViewGroup. A ViewGroup can contain other “child” Views. But since ViewGroup is a View… it can contain more ViewGroups inside it! Thus we can nest Views within Views, following the Composite Pattern. This ends up working a lot like HTML (which can have DOM elements like <div> inside other DOM elements), allowing for complex user interfaces.
+   - Thus Views are structured into a tree, what is known as the View hierarchy.
+- Views are defined inside of Layouts—that is, inside a layout resource, which is an XML file describing Views. These resources are “inflated” (rendered) into UI objects that are part of the application.
+- Technically, Layouts are simply ViewGroups that provide “ordering” and “positioning” information for the Views inside of them. they let the system “lay out” the Views intelligently and effectively. Individual views shouldn’t know their own position; this follows from good object-oriented design and keeps the Views encapsulated.
+- Android studio does come with a graphical Layout Editor (the “Design” tab) that can be used to create layouts. However, most developers stick with writing layouts in XML. This is mostly because early design tools were pathetic and unusable, so XML was all we had. Although Android Studio’s graphical editor can be effective, you should create layouts “by hand” in XML. This is helpful for making sure you understand the pieces underlying development, and is a skill you should be comfortable with anyway (similar to how we encourage people to use git from the command-line).
+#### View Properties
+- Before we get into how to group Views, let’s focus on the individual, basic View classes. As an example, consider the activity_main layout in the lecture code. This layout contains two individual View elements (inside a Layout): a TextView and a Button.
+- All Views have properties which define the state of the View. Properties are usually defined within the resource XML as element attributes. Some examples of these property attributes are described below.
+   - android:id specifies a unique identifier for the View. This identifier needs to be unique within the layout, though ideally is unique within the entire app (for clarity)
+      - Identifiers must be legal Java variable names (because they are turned into a variable name in the R class), and by convention are named in lower_case format.
+      - Style tip: it is useful to prefix each View’s id with its type (e.g., btn, txt, edt). This helps with making the code self-documenting.
+   - You should give each interactive View a unique id, which will allow its state to automatically be saved as a Bundle when the Activity is destroyed.
+   - android:layout_width and android:layout_height are used to specify the View’s size on the screen . These values can be a specific value (e.g., 12dp), but more commonly is one of two special values:
+     - wrap_content, meaning the dimension should be as large as the content requires, plus padding.
+     - match_parent, meaning the dimension should be as large as the parent (container) element, minus padding. This value was renamed from fill_parent (which has now been deprecated).
+   - Android utilizes the following dimensions or units:
+     - dp is a “density-independent pixel”. On a 160-dpi (dots-per-inch) screen, 1dp equals 1px (pixel). But as dpi increases, the number of pixels per dp increases. These values should be used instead of px, as it allows dimensions to work independent of the hardware’s dpi (which is highly variable).
+     - px is an actual screen pixel. DO NOT USE THIS (use dp instead!)
+     - sp is a “scale-independent pixel”. This value is like dp, but is scale by the system’s font preference (e.g., if the user has selected that the device should display in a larger font, 1sp will cover more dp). You should always use sp for text dimensions, in order to support user preferences and accessibility.
+     - pt is 1/72 of an inch of the physical screen. Similar units mm and in are available. Not recommended for use.
+   - android:padding, android:paddingLeft, android:margin, android:marginLeft, etc. are used to specify the margin and padding for Views. These work basically the same way they do in CSS: padding is the space between the content and the “edge” of the View, and margin is the space between Views. Note that unlike CSS, margins between elements do not collapse.
+   - android:textSize specifies the “font size” of textual Views (use sp units!), android:textColor specifies the color of text (reference a color resource!), etc.
+- Note that unlike CSS, styling properties specified in the layout XML resources are not inherited; we’re effectively specifying an inline style attribute for that element, and one that won’t affect child elements. In order to define shared style properties, you’ll need to use styles resources.
+- While it is possible to specify these visual properties dynamically via Java methods (e.g., setText(), setPadding()). You should only use Java methods to specify View properties when they need to be dynamic (e.g., the text changes in response to a button click)—it is much cleaner and effective to specify as much visual detail in the XML resource files as possible. It’s also possible to simply replace one layout resource with another (see below).
+   - Views also have inspection methods such as isVisible() and hasFocus(); we will point to those as we need them.
+- Do not define Views or View appearances in an Activity’s onCreate() callback, unless the properties (e.g., content) truly cannot be determined before runtime! Specify layouts in the XML instead.
+

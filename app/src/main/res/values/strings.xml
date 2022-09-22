@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AndroidTutorials</string>
+    <string name="first">First Name</string>
+    <string name="last">Last Name</string>
+    <string name="dob">Birth Date</string>
+    <string name="btnApply">APPLY</string>
+    <string name="country">Country</string>
+
 </resources>

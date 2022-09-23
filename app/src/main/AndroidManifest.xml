@@ -14,7 +14,10 @@
         android:theme="@style/Theme.AndroidTutorials"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".Tutorial2"
+            android:exported="false" />
+        <activity
+            android:name=".Tutorial1"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

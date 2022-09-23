@@ -6,16 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".MainActivity">
+    tools:context=".Tutorial1">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tutorial- 1"
-        android:textAlignment="center"
-        android:textSize="20sp"
         android:layout_marginBottom="15dp"
         android:fontFamily="monospace"
-        android:textStyle="bold|italic"/>
+        android:text="@string/title1"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +29,9 @@
             android:layout_weight="1"
             android:autofillHints="username"
             android:hint="@string/first"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColorHint="#757575" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -36,7 +39,9 @@
             android:layout_weight="1"
             android:autofillHints="username"
             android:hint="@string/last"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColorHint="#757575" />
     </LinearLayout>
 
     <EditText
@@ -44,7 +49,9 @@
         android:layout_height="wrap_content"
         android:autofillHints="dateOfBirth"
         android:hint="@string/dob"
-        android:inputType="date" />
+        android:inputType="date"
+        android:minHeight="48dp"
+        android:textColorHint="#757575" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,13 +64,25 @@
             android:layout_weight="1"
             android:autofillHints="country"
             android:hint="@string/country"
-            android:inputType="textCapSentences|textAutoCorrect|text" />
+            android:inputType="textCapSentences|textAutoCorrect|text"
+            android:minHeight="48dp"
+            android:textColorHint="#757575" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/btnApply" />
+            android:text="@string/btnApply"
+            android:textSize="20sp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSecondTut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="45dp"
+        android:text="Next Lesson"
+        android:textSize="20sp" />
 
 </LinearLayout>
